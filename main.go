@@ -20,6 +20,8 @@ func main() {
     {
       tasks.GET("/", TaskController.GetTasks)
       tasks.POST("/", TaskController.CreateTask)
+      tasks.PUT("/:id", TaskController.UpdateTask)
+      tasks.DELETE("/:id", TaskController.DeleteTask)
     }
   }
 
