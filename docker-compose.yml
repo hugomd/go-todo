@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  todo:
+    build: .
+    restart: always
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    environment:
+      - PORT=8080
+      - PG_USER=postgres
+      - PG_PASSWORD=secret
+      - PG_HOST=postgres
+      - PG_PORT=5432
+      - PG_DB=tasks
+    ports:
+      - 8080:8080
+  postgres:
+    image: postgres:10.1-alpine
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    environment:
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=tasks
+    ports:
+      - 5432:5432
