@@ -2,7 +2,8 @@ version: '3'
 
 services:
   todo:
-    build: .
+    image: go-todo:latest
+    # build: .
     restart: always
     depends_on:
       - postgres
