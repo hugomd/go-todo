@@ -1,7 +1,6 @@
 package task
 
 import (
-  "log"
   "net/http"
   "github.com/gin-gonic/gin"
   // "github.com/gin-gonic/gin/binding"
@@ -49,6 +48,11 @@ func DeleteTask(c *gin.Context) {
   id := c.Param("id")
   var task models.Task
   db := db.GetDB()
-  q := db.Where("id = ?", id).Delete(task)
-  log.Println(q.Error)
+
+  if err := db.Where("id = ?", id).First(&task).Error; err != nil {
+    c.AbortWithStatus(http.StatusNotFound)
+    return
+  }
+
+	db.Delete(&task)
 }
