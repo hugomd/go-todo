@@ -1,4 +1,4 @@
-FROM golang:alpine
+FROM docker.io/golang:alpine
 
 RUN apk add --update --no-cache alpine-sdk bash ca-certificates \
       libressl \
