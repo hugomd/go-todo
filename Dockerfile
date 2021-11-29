@@ -17,4 +17,5 @@ RUN go mod init
 RUN go mod tidy
 RUN go mod vendor
 
+# Run
 CMD ["go", "run", "main.go"]
